@@ -132,7 +132,6 @@ x, y = val[:, 1], val[:, 2]
 
 # Curve fit for the country Australia.
 # Indicator used is Co2 emission
-
 prmet, cov = opt.curve_fit(fct, x, y)
 dt1["pop_log"] = fct(x, *prmet)
 print("Parameters are:", prmet)
@@ -158,7 +157,6 @@ x2, y2 = val2[:, 1], val2[:, 2]
 
 # Curve fit for the country USA.
 # Indicator is Co2 emmision
-
 prmet, cov = opt.curve_fit(fct, x2, y2)
 dt2["pop_log"] = fct(x2, *prmet)
 print("Parameters are:", prmet)
