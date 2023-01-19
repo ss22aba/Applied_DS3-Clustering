@@ -16,18 +16,15 @@ import seaborn as sns
 import itertools as iter
 
 def read(indicator, country_code):
-    
     '''
      This function is used to get the dataframe. 
      Indicator and country_code are passed as the parameters. 
     '''
-
     df = wb.data.DataFrame(indicator, country_code, mrv=30)
     return df
 
 #==============================================================================
 def norm_df(df):
-    
     '''
     Returns all columns of the dataframe normalised to [0,1] with the
     exception of the first (containing the names)
@@ -40,7 +37,6 @@ def norm_df(df):
 
 #==============================================================================
 def err_ranges(x, func, param, sigma):
-    
     """
     Calculates the upper and lower limits for the function, parameters and
     sigmas for single value or array x. Functions values are calculated for 
@@ -69,16 +65,12 @@ def fct(x, a, b, c):
      polynominal function for the fitting
     '''
     return a*x**2+b*x+c
-
 #==============================================================================
 # Indicators selected
-
 #--------------Indicator 1 includes CO2 emissions (metric tons per capita) and
 # Electric power consumption (kWh per capita)---------------------------------#
-
 #---------------Indicator 2 includes Methane emissions (kt of CO2 equivalent) 
 # and Access to electricity (% of population)---------------------------------#
-
 indicator1 = ["EN.ATM.CO2E.PC", "EG.USE.ELEC.KH.PC"]
 indicator2 = ["EN.ATM.METH.KT.CE", "EG.ELC.ACCS.ZS"]
 
