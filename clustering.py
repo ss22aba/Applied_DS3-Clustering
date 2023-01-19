@@ -99,6 +99,8 @@ popt, covar = opt.curve_fit(exp_growth, x,y)
 param, covar = opt.curve_fit(poly, x, y)
 # produce columns with fit values
 df_y["fit"] = poly(df_y['Years'], *param)
+
+df_y["fit"] = exp_growth(df_y['Years'], *popt)
 # calculate the z-score
 df_y["diff"] = df_y['Japan'] - df_y["fit"]
 sigma = df_y["diff"].std()
@@ -118,4 +120,5 @@ plt.plot(x, poly(x, *param), 'k')
 plt.xlim(1960,2021)
 plt.legend()
 plt.show()
+
 
