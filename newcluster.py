@@ -14,6 +14,7 @@ import scipy.optimize as opt
 from sklearn.cluster import KMeans
 import seaborn as sns
 import itertools as iter
+import sklearn.cluster as cluster
 
 def read(indicator, country_code):
     '''
@@ -74,16 +75,17 @@ def fct(x, a, b, c):
 indicator1 = ["EN.ATM.CO2E.PC", "EG.USE.ELEC.KH.PC"]
 indicator2 = ["EN.ATM.METH.KT.CE", "EG.ELC.ACCS.ZS"]
 
-# Countries selected [Australia, China, Germany and United States]
-country_code = ['AUS', 'CHN', 'DEU', 'USA']
+# Countries selected 
+country_code = ['AUS','CHN','CAN','FRA','RUS','NZL','DEU','USA','ARG']
 
 # The CSV file is stored in a variable "Path".
 path = "World Indicator Repository.csv"
 # Indicator1 and country code read into "dat".
 dat = read(indicator1, country_code)
+# Transposing the data and rearranging the functions
 dat.columns = [i.replace('YR', '') for i in dat.columns]
 dat = dat.stack().unstack(level=1)
-# Setting the column name
+# Setting the index names
 dat.index.names = ['Country', 'Year']
 dat.columns
 dat1 = read(indicator2, country_code)
@@ -109,14 +111,16 @@ print(df_fit)
 
 # Plot for two clusters
 k = KMeans(n_clusters=2, init='k-means++', random_state=0).fit(df_fit)
+
+
 # Seaborn is used to scatterplot
 sns.set(style='whitegrid')
 sns.scatterplot(data=dt_norm, x="Country", y="EN.ATM.CO2E.PC",hue=k.labels_ )
+
 # Legend displayed
 plt.title("2 Clusters of countries for Co2 Emission")
 plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.show()
-
 dt1 = dt[(dt['Country'] == 'AUS')]
 dt1
 val = dt1.values
